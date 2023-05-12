@@ -1,40 +1,48 @@
-import React from 'react'
-import { useState } from 'react';
-
-
-const Content = () => {
-
-
-
-    const nameChangeHandler=()=>{
-    const names=['Earn', 'Grow', 'Give', 'hai', 'hello', 'are',  'you' , 'there', 'hoo'];
-    const int= Math.floor(Math.random()*9)
-  
-    return names[int];
-    
-    }
-
-
-  const [count, setCount]=useState(99);
-
-    const incrementFunction=()=>{
-      setCount(prevCount=>prevCount+1)
-    }
-
-    const decrementFunction=()=>{
-      setCount(prevCount=>prevCount-1)
-    }
-
+import React, { useState } from 'react'
+import { FaRegTrashAlt } from "react-icons/fa";
+const Content=()=>{
+    const [items, setItems]=useState([
+        {
+            id:1,
+            checked:true,
+            name:"HTML"
+        },
+        {
+            id:2,
+            checked:true,
+            name:"CSS"
+        },
+        {
+            id:3,
+            checked:false,
+            name:"JS"
+        },
+        {
+            id:4,
+            checked:true,
+            name:"REACT"
+        }
+    ]);
 
    
 
   return (
     <main>
-      <p >Content {nameChangeHandler()}</p>
-    <button>Subscribe</button>
-    <button onClick={decrementFunction}>-</button>
-    <span>{count}</span>
-    <button onClick={incrementFunction}>+</button>
+     <ul>
+        {items.map((item)=>(
+            <li className='item' key={item.id}>
+                <input type="checkbox" checked={item.checked} />
+                <label>{item.name}</label>
+                <button><FaRegTrashAlt 
+                role='button'
+                tabIndex={0}
+                /></button>
+              
+            </li>
+        ))}
+     </ul>
+      
+    
 
     </main>
   )
