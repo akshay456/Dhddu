@@ -1,12 +1,14 @@
 
-import './App.css';
+
 import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
 
 
 
-function App() {
+const App=()=> {
+
+  
   return (
     <div className="App">
     
