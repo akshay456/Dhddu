@@ -1,47 +1,24 @@
-import React, { useState } from 'react'
-import { FaRegTrashAlt } from "react-icons/fa";
-const Content=()=>{
-    const [items, setItems]=useState([
-        {
-            id:1,
-            checked:true,
-            name:"HTML"
-        },
-        {
-            id:2,
-            checked:true,
-            name:"CSS"
-        },
-        {
-            id:3,
-            checked:false,
-            name:"JS"
-        },
-        {
-            id:4,
-            checked:true,
-            name:"REACT"
-        }
-    ]);
+import React from "react"
+import ItemList from "./ItemList"
+
+
+const Content=({items, handleCheck, handleDelete})=>{
+   
+    
 
    
 
   return (
     <main>
-     <ul>
-        {items.map((item)=>(
-            <li className='item' key={item.id}>
-                <input type="checkbox" checked={item.checked} />
-                <label>{item.name}</label>
-                <button><FaRegTrashAlt 
-                role='button'
-                tabIndex={0}
-                /></button>
-              
-            </li>
-        ))}
-     </ul>
-      
+        {(items.length) ? (
+            <ItemList items={items}
+    
+            handleCheck={handleCheck}
+            handleDelete={handleDelete}/>
+     
+
+        ) : <p> wow you clear all the list in you to-do </p>
+                }
     
 
     </main>
