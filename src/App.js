@@ -4,33 +4,25 @@ import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
 import AddItem from './AddItem';
+import SearchItem from './SearchItem';
 
 
 
 const App=()=> {
 
-  const [items, setItems]=useState([
-    {
-        id:1,
-        checked:true,
-        name:"HTML"
-    },
-    {
-        id:2,
-        checked:true,
-        name:"CSS"
-    },
-    {
-        id:3,
-        checked:false,
-        name:"JS"
-    },
-    {
-        id:4,
-        checked:true,
-        name:"REACT"
+  const [items, setItems]=useState(JSON.parse(localStorage.getItem('todo_list')));
+
+   const [search, setSearch] = useState()
+  const addItem =(name)=> {
+    const id= items.length ? items[items.length-1].id+1 : 1
+    const addNewItem = {id, checked:false, name}
+    const listItems = [...items, addNewItem]
+    console.log(name)
+    console.log(newItem)
+    setItems(listItems)
+    localStorage.setItem("todo_list", JSON.stringify(listItems))
     }
-  ]);
+  
   
   const handleCheck =(id)=> {
     const listItems=items.map((item)=>
@@ -52,7 +44,11 @@ const App=()=> {
   const [newItem, setNewItem]= useState("");
 
   const handleSubmit=(e)=>{
-        console.log("submitted")
+    e.preventDefault()
+    if (!newItem) return;
+       console.log(newItem)
+      addItem(newItem)
+      setNewItem("")
   }
   
 
@@ -61,7 +57,12 @@ const App=()=> {
     <div className="App">
     
       <Header />
-      <AddItem/>
+
+      <AddItem 
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}/>
+        <SearchItem/>
       <Content  items={items}
     
     handleCheck={handleCheck}
